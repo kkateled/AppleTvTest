@@ -2,6 +2,8 @@ import os
 import allure
 import requests
 from allure_commons.types import AttachmentType
+import logging
+import json
 
 
 def add_logs(browser):
@@ -37,3 +39,35 @@ def add_video(browser):
         name='video recording',
         attachment_type=allure.attachment_type.HTML,
     )
+
+
+def response_logging(response: requests.Response):
+    logging.info("Request: " + response.request.url)
+    if response.request.body:
+        logging.info("INFO Request body: " + response.request.body.decode('utf-8'))
+    logging.info("Request headers: " + str(response.request.headers))
+    logging.info("Response code " + str(response.status_code))
+    logging.info("Response: " + response.text)
+
+
+def response_attaching(response: requests.Response):
+    allure.attach(
+        body=response.request.url,
+        name="Request url",
+        attachment_type=AttachmentType.TEXT,
+    )
+
+    if response.request.body:
+        allure.attach(
+            body=json.dumps(response.request.body.decode('utf-8'), indent=4, ensure_ascii=True),
+            name="Request body",
+            attachment_type=AttachmentType.JSON,
+            extension="json",
+        )
+    else:
+        allure.attach(
+            body=json.dumps(response.json(), indent=4, ensure_ascii=True),
+            name="Response",
+            attachment_type=AttachmentType.JSON,
+            extension="json",
+        )
