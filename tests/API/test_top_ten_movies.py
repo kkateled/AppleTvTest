@@ -5,7 +5,7 @@ from start_project.utils.api_helper import api_request
 
 
 @allure.title("Checking top 10 movies")
-def test_search_movie_api(base_api_url):
+def test_top_ten_movies_api(base_api_url):
     endpoint = "/api/uts/v3/shelves/uts.col.ChartsMovies.tvs.sbd.4000"
     params = {"caller": "web",
               "ctx_brand": "tvs.sbd.4000",

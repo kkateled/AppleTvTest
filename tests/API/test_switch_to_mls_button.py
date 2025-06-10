@@ -3,7 +3,7 @@ from start_project.utils.api_helper import api_request
 
 
 @allure.title("Checking mls page")
-def test_search_movie_api(base_api_url):
+def test_switch_to_mls_api(base_api_url):
     endpoint = "/api/uts/v3/canvases/channels/tvs.sbd.7000"
     params = {"caller": "web",
               "locale": "en-US",
