@@ -17,7 +17,7 @@ def manage_browser(request):
     options = ChromeOptions()
     driver_class = webdriver.Chrome
     browser.config.driver = driver_class(options=options)
-    browser.config.base_url = "https://tv.apple.com/"
+    browser.config.base_url = "https://tv.apple.com"
     browser.config.window_width = 1700
     browser.config.window_height = 1080
     browser.config.timeout = 30

@@ -66,7 +66,7 @@ class TestMainPage:
     @allure.severity(Severity.NORMAL)
     @allure.link('https://tv.apple.com/', name='AppleTV')
     def test_select_film_by_genre(self):
-        film_genre = 'Sci-fi'
+        film_genre = 'Sci-Fi'
         main_page.open()
         main_page.check_title_genres_name()
         main_page.go_to_selected_films_genre(film_genre)

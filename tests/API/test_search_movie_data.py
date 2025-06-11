@@ -4,6 +4,9 @@ from start_project.shemas.search_shema import search
 from start_project.utils.api_helper import api_request
 
 
+@allure.tag('API')
+@allure.feature('API')
+@allure.story('Search movie')
 @allure.title("Checking movie data")
 def test_search_movie_api(base_api_url):
     endpoint = "/api/uts/v3/search"

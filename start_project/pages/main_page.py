@@ -7,20 +7,20 @@ import time
 
 class MainPage:
     def __init__(self):
-        self.appletv_element = s("//span[@dir='ltr'][normalize-space()='Apple TV+']")
-        self.mls_element = s("//span[@dir='ltr'][normalize-space()='MLS']")
-        self.first_element_in_apple_tv_page = s('//h2[text()="Top 10 TV Shows"]')
+        self.appletv_element = s("//a[@dir='ltr'][normalize-space()='Apple TV+']")
+        self.mls_element = s("//a[@dir='ltr'][normalize-space()='MLS']")
+        self.first_element_in_apple_tv_page = s("//span[text()='Top 10 TV Shows']")
 
         self.signin_form = s("//button[normalize-space()='Sign In']")
-        self.registration_element = s("//iframe")
+        self.registration_element = s("[data-test='accountName-input']")
 
-        self.search_button = s('#search-header-form-input-box')
+        self.search_button = s('[data-testid="search-input__text-field"]')
 
-        self.sections = ss('.typ-headline-emph')
-        self.page_title_section = s('.collection-page__title.typography-title-2-emphasized')
+        self.sections = ss('.dir-wrapper')
+        self.page_title_section = s('.dir-wrapper')
 
-        self.film_genre = '//img[contains(@alt, {genre})]'
-        self.name_title_of_all_film_genres = s('//h2[text()="Browse by Category"]')
+        self.film_genre = '//a[@aria-label="{genre}"]'
+        self.name_title_of_all_film_genres = s('//span[text()="Browse by Category"]')
 
     @allure.step('Open browser')
     def open(self):
@@ -36,6 +36,9 @@ class MainPage:
 
     @allure.step('Check registration is available')
     def check_registration_options_available(self):
+        time.sleep(6)
+        browser.driver.switch_to.frame(0)
+        time.sleep(6)
         self.registration_element.should(be.visible)
 
     @allure.step('Check AppleTV button is clickable')
@@ -58,7 +61,7 @@ class MainPage:
     @allure.step('Check search result')
     def check_result(self, film_title):
         try:
-            search_hints = browser.all('ul.search-hints li')
+            search_hints = browser.all('ul.shelf-grid__list li')
             search_hints.should(have.size_greater_than(0))
             search_hints.first.click()
         except NoSuchElementException:

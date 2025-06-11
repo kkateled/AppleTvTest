@@ -2,6 +2,9 @@ import allure
 from start_project.utils.api_helper import api_request
 
 
+@allure.tag('API')
+@allure.feature('API')
+@allure.story('MLS page')
 @allure.title("Checking mls page")
 def test_switch_to_mls_api(base_api_url):
     endpoint = "/api/uts/v3/canvases/channels/tvs.sbd.7000"

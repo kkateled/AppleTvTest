@@ -4,6 +4,9 @@ from jsonschema import validate
 from start_project.shemas.trailer_shema import trailer
 
 
+@allure.tag('API')
+@allure.feature('API')
+@allure.story('Trailer movie')
 @allure.title("Checking trailer data")
 def test_trailer_api(base_api_url):
     endpoint = "/api/uts/v3/shelves/uts.col.Trailers.umc.cmc.26o403koqo2klixc0jtqy6tmc"

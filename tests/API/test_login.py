@@ -3,6 +3,9 @@ import os
 from start_project.utils.api_helper import api_request
 
 
+@allure.tag('API')
+@allure.feature('API')
+@allure.story('Auth')
 @allure.title("Check auth")
 def test_trailer_api():
     base_api_url = "https://idmsa.apple.com"

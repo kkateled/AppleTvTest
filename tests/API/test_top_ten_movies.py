@@ -4,6 +4,9 @@ from start_project.shemas.top_ten_movies_shema import movies
 from start_project.utils.api_helper import api_request
 
 
+@allure.tag('API')
+@allure.feature('API')
+@allure.story('Top 10 movies')
 @allure.title("Checking top 10 movies")
 def test_top_ten_movies_api(base_api_url):
     endpoint = "/api/uts/v3/shelves/uts.col.ChartsMovies.tvs.sbd.4000"
