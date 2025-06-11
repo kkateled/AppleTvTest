@@ -1,3 +1,4 @@
-**/allure_results/
+allure_results/
 .pytest_cache/
 .idea
+.env

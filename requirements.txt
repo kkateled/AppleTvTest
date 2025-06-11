@@ -3,3 +3,4 @@ allure-pytest
 selene --pre
 faker
 requests
+jsonschema
