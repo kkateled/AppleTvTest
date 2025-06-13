@@ -4,3 +4,5 @@ selene --pre
 faker
 requests
 jsonschema
+Appium-Python-Client
+allure-pytest

@@ -1,4 +1,3 @@
-import os
 import allure
 import requests
 from allure_commons.types import AttachmentType
@@ -21,12 +20,17 @@ def add_screenshot(browser):
     allure.attach(body=png, name='screenshot', attachment_type=AttachmentType.PNG, extension='.png')
 
 
-def add_video(browser):
-    user_name = os.getenv('USER_NAME')
-    access_key = os.getenv('ACCESS_KEY')
+def add_xml(browser):
+    xml_dump = browser.driver.page_source
+    allure.attach(body=xml_dump,
+                  name='XML screen',
+                  attachment_type=allure.attachment_type.XML)
+
+
+def add_video(session_id, login, access_key):
     bstack_session = requests.get(
-        f'https://api.browserstack.com/app-automate/sessions/{browser.driver.session_id}.json',
-        auth=(user_name, access_key),
+        f'https://api.browserstack.com/app-automate/sessions/{session_id}.json',
+        auth=(login, access_key),
     ).json()
     video_url = bstack_session['automation_session']['video_url']
 
@@ -56,7 +60,6 @@ def response_attaching(response: requests.Response):
         name="Request url",
         attachment_type=AttachmentType.TEXT,
     )
-
     if response.request.body:
         allure.attach(
             body=json.dumps(response.request.body.decode('utf-8'), indent=4, ensure_ascii=True),
